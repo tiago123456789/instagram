@@ -18,6 +18,7 @@ export default class Atualizacao extends Component {
     event.preventDefault();
     const dadosRetornados = await this._fotoService.like(idFoto, TokenService.getAccessToken());
     this.setState({ likeado: !this.state.likeado });
+    this.props.actionTriggerLikeOuDeslike(dadosRetornados.login);
   }
 
   render() {
