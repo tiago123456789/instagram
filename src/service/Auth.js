@@ -10,7 +10,6 @@ export default class Auth extends AbstractService {
 
     isAutenticado() {
         const accessToken = localStorage.getItem(App.LOCALSTORAGE.KEY_AUTH_TOKEN);
-        console.log(accessToken);
         if (accessToken && accessToken.length > 0) {
             return true;
         }

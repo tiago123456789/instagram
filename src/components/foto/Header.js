@@ -6,7 +6,7 @@ export default (props) => (
         <figure className="foto-usuario">
             <img src={props.urlPerfil} alt="foto do usuario" />
             <figcaption className="foto-usuario">
-                <Link>
+                <Link to={`/timeline/${props.login}`}>
                     {props.login}
                   </Link>
             </figcaption>

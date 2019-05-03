@@ -16,7 +16,7 @@ export default () => (
         <nav>
             <ul className="header-nav">
                 <li className="header-nav-item">
-                    <Link >
+                    <Link to="/">
                         ♡
                     </Link>
                 </li>

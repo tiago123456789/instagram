@@ -14,6 +14,6 @@ export default (props) => (
         <Info likers={props.dados.likers} 
         login={props.dados.loginUsuario} comentario={props.dados.comentario} 
         comentarios={props.dados.comentarios} />
-        <Atualizacao />
+        <Atualizacao idFoto={props.dados.id} likeada={props.dados.likeada} />
     </div>
 );
