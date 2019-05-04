@@ -12,6 +12,21 @@ export default class Atualizacao extends Component {
       likeado: props.likeada
     };
     this.likear = this.likear.bind(this);
+    this.adicionarComentario = this.adicionarComentario.bind(this);
+  }
+
+  limparCampoComentario() {
+    this.texto.value = "";
+  }
+
+  async adicionarComentario(event, idFoto) {
+    event.preventDefault();
+    const comment = { texto: this.texto.value };
+    const dadosRetornados = await this._fotoService.comment(
+      idFoto, comment, TokenService.getAccessToken()
+    );
+    this.limparCampoComentario();
+    this.props.actionTriggerComment(dadosRetornados);
   }
 
   async likear(event, idFoto) {
@@ -24,11 +39,11 @@ export default class Atualizacao extends Component {
   render() {
     return (
       <section className="fotoAtualizacoes">
-        <a href="/" onClick={(event) => this.likear(event, this.props.idFoto) } 
-         className={ this.state.likeado ? "fotoAtualizacoes-like-ativo" : "fotoAtualizacoes-like" } >Likar</a>
-        <form className="fotoAtualizacoes-form">
-          <input type="text" placeholder="Adicione um comentário..." 
-          className="fotoAtualizacoes-form-campo" />
+        <a href="/" onClick={(event) => this.likear(event, this.props.idFoto)}
+          className={this.state.likeado ? "fotoAtualizacoes-like-ativo" : "fotoAtualizacoes-like"} >Likar</a>
+        <form className="fotoAtualizacoes-form" onSubmit={(event) => this.adicionarComentario(event, this.props.idFoto)}>
+          <input type="text" placeholder="Adicione um comentário..."
+            className="fotoAtualizacoes-form-campo" ref={(input) => this.texto = input} />
           <input type="submit" value="Comentar!" className="fotoAtualizacoes-form-submit" />
         </form>
       </section>

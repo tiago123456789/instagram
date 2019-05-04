@@ -3,6 +3,9 @@ import { Link } from "react-router-dom"
 
 export default class Info extends Component {
     
+    componentDidMount() {
+        console.log(this.props);
+    }
     render() {
         return (
             <div className="foto-in fo">
@@ -20,7 +23,7 @@ export default class Info extends Component {
                 <ul className="foto-info-comentarios">
                     { this.props.comentarios.map(comentario => (
                         <li className="comentario" style={{ "text-indent": "10px" }}>
-                        <Link to={`/timeline/${comentario.login}`} className="foto-info-autor">seguidor </Link>
+                        <Link to={`/timeline/${comentario.login}`} className="foto-info-autor">{comentario.login} </Link>
                             {comentario.texto}
                         </li>
                     ))}

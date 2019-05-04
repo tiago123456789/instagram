@@ -8,9 +8,15 @@ export default class Foto extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            likers: props.dados.likers
+            likers: props.dados.likers,
+            comentarios: props.dados.comentarios
         };
         this.adicionarOuRemoveListaLiker = this.adicionarOuRemoveListaLiker.bind(this);
+        this.adicionarComentarioAosExistentes = this.adicionarComentarioAosExistentes.bind(this);
+    }
+
+    adicionarComentarioAosExistentes(comentario) {
+        this.setState({ comentarios: [...this.state.comentarios, comentario ]});
     }
     
     adicionarOuRemoveListaLiker(login) {
@@ -35,9 +41,10 @@ export default class Foto extends Component {
                 src={this.props.dados.urlFoto} />
                 <Info likers={this.state.likers} 
                 login={this.props.dados.loginUsuario} comentario={this.props.dados.comentario} 
-                comentarios={this.props.dados.comentarios} />
+                comentarios={this.state.comentarios} />
                 <Atualizacao idFoto={this.props.dados.id} 
                 likeada={this.props.dados.likeada} 
+                actionTriggerComment={this.adicionarComentarioAosExistentes}
                 actionTriggerLikeOuDeslike={this.adicionarOuRemoveListaLiker}/>
             </div>
         );

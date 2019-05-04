@@ -9,4 +9,8 @@ export default class FotoService extends AbstractService {
     like(idFoto, accessToken) {
         return this.post(`fotos/${idFoto}/like?X-AUTH-TOKEN=${accessToken}`);
     }
+
+    comment(idFoto, datas, accessToken) {
+        return this.post(`fotos/${idFoto}/comment?X-AUTH-TOKEN=${accessToken}`, datas);
+    }
 }

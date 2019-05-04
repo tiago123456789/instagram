@@ -39,8 +39,9 @@ export default class Timeline extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.login) {
-            this.carregarFotos(nextProps.login);
+        const login = nextProps.match.params.login; 
+        if (login) {
+            this.carregarFotos(login);
         }
     }
 
