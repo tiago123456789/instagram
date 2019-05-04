@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
 import Timeline from "./components/Timeline";
-import Login from "./components/Login";
+import Login from "./components/auth/Login";
 import ProtectedRoute from './components/auth/ProtectedRoute'
 import Logout from "./components/auth/Logout";
 

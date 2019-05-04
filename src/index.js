@@ -1,7 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './css/timeline.css';
-import './css/login.css'
+import reduxThunk from "redux-thunk";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import rootReducer from "./Reducer";
 import App from './App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import './css/timeline.css';
+import './css/login.css'
+
+const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+const store = applyMiddleware(reduxThunk)(createStore)(rootReducer, devTools);
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));

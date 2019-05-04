@@ -4,6 +4,7 @@ import FotoService from "../service/FotoService";
 import Header from "./Header";
 import Auth from "../service/Auth";
 import TokenService from "../service/TokenService";
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export default class Timeline extends Component {
 
@@ -15,6 +16,7 @@ export default class Timeline extends Component {
         this._fotoService = new FotoService();
         this._authService = new Auth();
         this._tokenService = new TokenService();
+        this.carregarFotos = this.carregarFotos.bind(this);
     }
 
 
@@ -48,8 +50,13 @@ export default class Timeline extends Component {
     render() {
         return (
             <div className="main">
-                <Header />
-                { this.state.fotos.map((dados, indice) => ( <Foto key={indice} dados={dados} /> )) }
+                <Header {...this.props} />
+                <ReactCSSTransitionGroup
+                    transitionName="timeline"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={300}>
+                    { this.state.fotos.map((dados, indice) => ( <Foto key={indice} dados={dados} /> )) }
+                </ReactCSSTransitionGroup>
             </div>
         )
     }
