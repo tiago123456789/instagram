@@ -30,8 +30,8 @@ export default class Header extends Component {
                 <nav>
                     <ul className="header-nav">
                         <li className="header-nav-item">
-                            <Link to="/">
-                                ♡
+                            <Link to="/logout" style={{ "fontSize": "1em" }}>
+                                Sair
                             </Link>
                         </li>
                     </ul>

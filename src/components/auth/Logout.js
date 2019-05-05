@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import Auth from "../../service/Auth";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { logout } from "./Actions";
@@ -9,7 +8,6 @@ class Logout extends Component {
 
     constructor() {
         super();
-        this._authService = new Auth();
     }
 
     componentWillMount() {

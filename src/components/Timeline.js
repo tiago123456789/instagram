@@ -1,21 +1,18 @@
 import React, { Component } from "react";
-import Foto from "./foto/Foto";
-import FotoService from "../service/FotoService";
-import Header from "./Header";
-import Auth from "../service/Auth";
-import TokenService from "../service/TokenService";
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
-export default class Timeline extends Component {
+import Foto from "./foto/Foto";
+import Header from "./Header";
+import TokenService from "../service/TokenService";
+import { carregarFotos } from "./Actions";
+
+class Timeline extends Component {
 
     constructor() {
         super();
-        this.state = {
-            fotos: []
-        };
-        this._fotoService = new FotoService();
-        this._authService = new Auth();
-        this._tokenService = new TokenService();
+        this.login = null;
         this.carregarFotos = this.carregarFotos.bind(this);
     }
 
@@ -26,10 +23,7 @@ export default class Timeline extends Component {
 
         if (foiInformadoLogin || this._authService.isAutenticado()) {
             login = login ? login : TokenService.getPayloadToken(TokenService.getAccessToken()).sub;
-
-            this._fotoService
-                .getPhotosProfiles(login)
-                .then(photos => this.setState({ fotos: photos }));
+            this.props.carregarFotos(login);
         } else {
             this.props.history.push("/login");
         }
@@ -41,8 +35,9 @@ export default class Timeline extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        const login = nextProps.match.params.login; 
-        if (login) {
+        const login = nextProps.match.params.login || TokenService.getPayloadToken(TokenService.getAccessToken()).sub; 
+        if (!this.login || this.login != login) {
+            this.login = login;
             this.carregarFotos(login);
         }
     }
@@ -55,9 +50,13 @@ export default class Timeline extends Component {
                     transitionName="timeline"
                     transitionEnterTimeout={500}
                     transitionLeaveTimeout={300}>
-                    { this.state.fotos.map((dados, indice) => ( <Foto key={indice} dados={dados} /> )) }
+                    { this.props.fotos.map((dados, indice) => ( <Foto key={indice} dados={dados} /> )) }
                 </ReactCSSTransitionGroup>
             </div>
         )
     }
 }
+
+const mapStateToProps = (state) => ({ fotos: state.timeline.fotos, reload: state.timeline.reload });
+const mapDispatchToProps = (dispatch) => bindActionCreators({ carregarFotos: carregarFotos }, dispatch);
+export default connect(mapStateToProps, mapDispatchToProps)(Timeline);

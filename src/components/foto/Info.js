@@ -7,7 +7,7 @@ export default class Info extends Component {
         return (
             <div className="foto-in fo">
                 <div className="foto-info-likes">
-                    { this.props.likers.map(liker => ( <Link >{liker.login}</Link> )) }
+                    { this.props.likers.map((liker, indice) => ( <Link key={indice} to={`/timeline/${liker.login}`} >{liker.login} &nbsp;</Link> )) }
                     &nbsp;
                     curtiram
                 </div>
@@ -18,8 +18,8 @@ export default class Info extends Component {
                 </p>
         
                 <ul className="foto-info-comentarios">
-                    { this.props.comentarios.map(comentario => (
-                        <li className="comentario" style={{ "text-indent": "10px" }}>
+                    { this.props.comentarios.map((comentario, indice) => (
+                        <li key={indice} className="comentario" style={{ "textIndent": "10px" }}>
                         <Link to={`/timeline/${comentario.login}`} className="foto-info-autor">{comentario.login} </Link>
                             {comentario.texto}
                         </li>

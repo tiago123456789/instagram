@@ -142,6 +142,7 @@ html,body {
   }
   
   .foto-info-likes {
+    text-indent: 10px;
     list-style: none;
   }
   
@@ -157,6 +158,8 @@ html,body {
   
   .foto-info-autor {
     font-weight: bold;
+    text-decoration: none;
+    color: #069;
   }
   
   

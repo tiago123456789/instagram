@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux"; 
-import Auth from '../../service/Auth';
+
 import App from '../../conf/App';
 import { autenticar } from "./Actions";
 
@@ -9,10 +9,6 @@ class Login extends Component {
 
     constructor() {
         super();
-        this.state = {
-            msgError: ''
-        };
-        this._authService = new Auth();
         this.autenticar = this.autenticar.bind(this);
     }
 
