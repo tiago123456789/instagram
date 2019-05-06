@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 
 import Foto from "./foto/Foto";
 import Header from "./Header";
+import Auth from "../service/Auth";
 import TokenService from "../service/TokenService";
 import { carregarFotos } from "./Actions";
 
@@ -13,6 +14,7 @@ class Timeline extends Component {
     constructor() {
         super();
         this.login = null;
+        this._authService = new Auth()
         this.carregarFotos = this.carregarFotos.bind(this);
     }
 
